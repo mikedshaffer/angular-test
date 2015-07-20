@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="sample">
+
+  <head>
+  <meta charset="utf-8" />
+    <title>AngularJS</title>
+    <link rel="stylesheet" href="style.css" />
+    <script data-require="angular.js@1.4.x" src="https://code.angularjs.org/1.4.2/angular.js" data-semver="1.4.2"></script>
+    <script src="app.js"></script>
+    <script src="listservice.js"></script>
+  </head>
+
+  <body ng-controller="MainCtrl as main">
+    <div>
+    <select ng-model="chosenQuestion" ng-options="questions.question for questions in main.questions">
+      <option value="">Choose a question</option>
+    </select>
+     <button ng-click="main.addNewQuestion()">
+       <span ng-show="!main.showNew">New</span>
+       <span ng-show="main.showNew">Add</span>
+      </button>
+     </div>
+    <p>{{chosenQuestion.question}}
+    <table>
+      <tr ng-repeat="choices in chosenQuestion.choices">
+        <td>{{choices.choice}}</td>
+        <td>{{choices.votes}}</td>
+        <td><button ng-click="main.makeChoice(choices.url)">Pick Me</button></td>
+      </tr>
+    </table>
+    <div ng-show="main.showNew" >
+      <input id="questionName" ng-model=main.questionName />
+      <textarea id="questionChoices" ng-model=main.questionChoices></textarea>
+    </div>
+
+  </body>
+
+</html>
